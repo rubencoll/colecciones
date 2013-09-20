@@ -49,6 +49,13 @@ public class Coche {
     public void setDNI(String DNI) {
         this.DNI = DNI;
     }
+
+    //Metodos
     
-    
+    public String getInformacionCoche() {
+
+        String informacionCoche = "Marca: "+ this.marca + " \n Modelo: " + this.modelo + "\n Cilindrada: " + this.cilindrada+"\n Propietario: "+this.DNI;
+
+        return informacionCoche;
+    }
 }
