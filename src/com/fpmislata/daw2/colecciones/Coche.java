@@ -54,7 +54,7 @@ public class Coche {
     
     public String getInformacionCoche() {
 
-        String informacionCoche = "Marca: "+ this.marca + " \n Modelo: " + this.modelo + "\n Cilindrada: " + this.cilindrada+"\n Propietario: "+this.DNI;
+        String informacionCoche = " Marca: "+ this.marca + " \n Modelo: " + this.modelo + "\n Cilindrada: " + this.cilindrada+"\n Propietario: "+this.DNI;
 
         return informacionCoche;
     }

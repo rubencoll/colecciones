@@ -47,19 +47,19 @@ public class Colecciones {
 
             seleccionMenu = sc.nextInt();
 
-            if (seleccionMenu == 1) {   // Insertar Coches por Consola
+            if (seleccionMenu == 1) {   // Insertar Coche por Consola
 
                 insertarConsolaCoches(listaCoches, mapCoches);
 
-            } else if (seleccionMenu == 2) { // Ver número Personas
+            } else if (seleccionMenu == 2) { // Ver número Coches
 
                 imprimirNumeroDeCoches(listaCoches);
 
-            } else if (seleccionMenu == 3) {    // Ver todas las personas
+            } else if (seleccionMenu == 3) {    // Ver todos los coches
 
                 imprimirListaCoches(listaCoches);
 
-            } else if (seleccionMenu == 4) {    // Buscar persona por DNI
+            } else if (seleccionMenu == 4) {    // Buscar coche por DNI del propietario
 
                 Scanner scb = new Scanner(System.in);
 
@@ -67,7 +67,7 @@ public class Colecciones {
                 String dniBuscar = scb.next();
                 buscarCochesDNI(listaCoches, dniBuscar);
 
-            } else if (seleccionMenu == 5) {  // Buscar persona por MAP con DNI
+            } else if (seleccionMenu == 5) {  // Buscar coche por DNI del propietario, usando MAP
 
                 Scanner scbm = new Scanner(System.in);
 
@@ -75,7 +75,7 @@ public class Colecciones {
                 String dniBuscar = scbm.next();
                 buscarCochesMapDNI(mapCoches, dniBuscar);
 
-            } else if (seleccionMenu == 6) { //Ver todas las personas usando MAP
+            } else if (seleccionMenu == 6) { //Mostrar el coche en Segunda posicion
 
                 imprimirCocheSegundaPosicion(listaCoches);
 
@@ -98,7 +98,8 @@ public class Colecciones {
         }
     }
 
-    //Insertar una persona nueva por consola
+    //Insertar un coche nuevo por consola
+    
     private static void insertarConsolaCoches(List<Coche> coches, Map<String, Coche> mapCoches) {
 
         Coche coche = new Coche();
@@ -147,11 +148,12 @@ public class Colecciones {
 
         coche.setDNI(dni);
 
-        mapCoches.put(dni, coche);  //Insertamos un map, indicando el Objeto y un indici (DNI)
+        mapCoches.put(dni, coche);  //Insertamos un map, indicando el Objeto y un indice (DNI)
         coches.add(coche);    //añadimos a la lista
     }
 
     //Imprimir el numero de coches que hay en el arrayList
+    
     private static void imprimirNumeroDeCoches(List<Coche> coches) {
 
         System.out.println("El numero de coches de la lista es: " + coches.size());
@@ -159,6 +161,7 @@ public class Colecciones {
     }
 
     //Imprimir todo la lista de coches que hay en el arrayList
+    
     private static void imprimirListaCoches(List<Coche> coches) {
 
         System.out.println("########### LISTA ############");
@@ -175,6 +178,7 @@ public class Colecciones {
     }
 
     //Buscar coches por el DNI del propietario
+    
     private static void buscarCochesDNI(List<Coche> coches, String dnibuscar) {
 
         System.out.println("########### LISTA ############");
@@ -194,6 +198,7 @@ public class Colecciones {
     }
 
     //Buscar coche pasando DNI propietario con MAP
+    
     private static void buscarCochesMapDNI(Map<String, Coche> mapCoches, String dnibuscar) {
 
         System.out.println("########### LISTA ############");
