@@ -32,7 +32,9 @@ public class Colecciones {
 
         while (seleccionMenu != 0) {
 
-            System.out.println("MENU");
+            System.out.println("");
+            System.out.println("##############@ MENU ################");
+            System.out.println("");
             System.out.println("1- Insertar Coche por Consola");
             System.out.println("2- Ver número Coches");
             System.out.println("3- Ver todos los coches");
@@ -44,7 +46,8 @@ public class Colecciones {
             System.out.println("9- Imprimir Coches FORD con MAP");
             System.out.println("");
             System.out.println("0- Salir");
-
+            System.out.println("");
+            System.out.println("#######################################");
             seleccionMenu = sc.nextInt();
 
             if (seleccionMenu == 1) {   // Insertar Coche por Consola
