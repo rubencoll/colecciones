@@ -13,7 +13,7 @@ public class Coche {
     private Marca marca;
     private String modelo;
     private int cilindrada;
-    private String DNI;
+    private Persona propietario;
 
     public Coche() {
     }
@@ -42,19 +42,20 @@ public class Coche {
         this.cilindrada = cilindrada;
     }
 
-    public String getDNI() {
-        return DNI;
+
+    public Persona getPropietario() {
+        return propietario;
     }
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
+    public void setPropietario(Persona propietario) {
+        this.propietario = propietario;
     }
 
     //Metodos
     
     public String getInformacionCoche() {
 
-        String informacionCoche = " Marca: "+ this.marca + " \n Modelo: " + this.modelo + "\n Cilindrada: " + this.cilindrada+"\n Propietario: "+this.DNI;
+        String informacionCoche = " Marca: " + this.marca + " \n Modelo: " + this.modelo + "\n Cilindrada: " + this.cilindrada + "\n Propietario: " + this.propietario.getDni();
 
         return informacionCoche;
     }

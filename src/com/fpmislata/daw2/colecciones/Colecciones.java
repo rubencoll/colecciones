@@ -26,6 +26,11 @@ public class Colecciones {
         List<Coche> listaCoches = new ArrayList<Coche>(); //Declaramos una arrayList de coches
         Map<String, Coche> mapCoches = new HashMap<>();  //Declaramos el Map de personas, similar a una lista pero una un valor indice
 
+
+        Map<String, Persona> mapPersonas = new HashMap<String, Persona>();  //Declaramos el Map de personas, similar a una lista pero una un valor indice
+        List<Persona> listaPersonas = new ArrayList<Persona>(); //Declaramos una arrayList de personas
+
+
         Scanner sc = new Scanner(System.in);
 
         int seleccionMenu = -1;
@@ -44,6 +49,9 @@ public class Colecciones {
             System.out.println("7- Imprimir Coches FORD");
             System.out.println("8- Mostrar todos los coches por MAP");
             System.out.println("9- Imprimir Coches FORD con MAP");
+            System.out.println("10-Insertar Persona ");
+            System.out.println("11-Buscar Persona por DNI");
+            System.out.println("12-Imprimir Persona por DNI");
             System.out.println("");
             System.out.println("0- Salir");
             System.out.println("");
@@ -52,7 +60,7 @@ public class Colecciones {
 
             if (seleccionMenu == 1) {   // Insertar Coche por Consola
 
-                insertarConsolaCoches(listaCoches, mapCoches);
+                insertarConsolaCoches(listaCoches, mapCoches, listaPersonas);
 
             } else if (seleccionMenu == 2) { // Ver número Coches
 
@@ -91,9 +99,20 @@ public class Colecciones {
                 imprimirListaCochesMap(mapCoches);
 
             } else if (seleccionMenu == 9) { //Imprimir Coches FORD con MAP
-                
+
                 imprimirCochesFordMap(mapCoches);
-                
+            } else if (seleccionMenu == 10) {
+
+                insertarConsolaPersonas(listaPersonas, mapPersonas);
+
+            } else if (seleccionMenu == 11) {
+
+                System.out.println("Dime el DNI del propietario: ");
+                String dni = sc.next();
+                Persona personaBuscada;
+
+                personaBuscada = buscarPersonasDNI(listaPersonas, dni);
+            } else if (seleccionMenu == 12) {
             } else if (seleccionMenu == 0) {    //Salir
 
                 break;
@@ -102,10 +121,11 @@ public class Colecciones {
     }
 
     //Insertar un coche nuevo por consola
-    
-    private static void insertarConsolaCoches(List<Coche> coches, Map<String, Coche> mapCoches) {
+    private static void insertarConsolaCoches(List<Coche> coches, Map<String, Coche> mapCoches, List<Persona> listaPersonas) {
 
         Coche coche = new Coche();
+
+        //coches = coche.getPropietario().getListaCoches();
 
         Scanner sc = new Scanner(System.in);
 
@@ -149,14 +169,21 @@ public class Colecciones {
         System.out.println("Dime el DNI del propietario: ");
         String dni = sc.next();
 
-        coche.setDNI(dni);
+        Persona p = buscarPersonasDNI(listaPersonas, dni);
+
+        p.setDni(dni);
+
+        coche.setPropietario(p);
+
+
 
         mapCoches.put(dni, coche);  //Insertamos un map, indicando el Objeto y un indice (DNI)
         coches.add(coche);    //añadimos a la lista
+
+
     }
 
     //Imprimir el numero de coches que hay en el arrayList
-    
     private static void imprimirNumeroDeCoches(List<Coche> coches) {
 
         System.out.println("El numero de coches de la lista es: " + coches.size());
@@ -164,7 +191,6 @@ public class Colecciones {
     }
 
     //Imprimir todo la lista de coches que hay en el arrayList
-    
     private static void imprimirListaCoches(List<Coche> coches) {
 
         System.out.println("########### LISTA ############");
@@ -180,15 +206,32 @@ public class Colecciones {
         System.out.println("");
     }
 
+    //Buscar personas por el DNI que le pasamos por consola
+    private static Persona buscarPersonasDNI(List<Persona> personas, String dnibuscar) {
+
+        Persona personaBuscada = null;
+
+        for (Persona p : personas) {
+
+            if (p.getDni().equalsIgnoreCase(dnibuscar)) {
+
+                personaBuscada = p;
+                return p;
+            }
+        }
+
+        return personaBuscada;
+
+    }
+
     //Buscar coches por el DNI del propietario
-    
     private static void buscarCochesDNI(List<Coche> coches, String dnibuscar) {
 
         System.out.println("########### LISTA ############");
 
         for (Coche coche : coches) {
 
-            if (coche.getDNI().equalsIgnoreCase(dnibuscar)) {
+            if (coche.getPropietario().getDni().equalsIgnoreCase(dnibuscar)) {
                 System.out.println("-------------------------------------------------");
                 System.out.println(coche.getInformacionCoche());
                 System.out.println("-------------------------------------------------");
@@ -201,7 +244,6 @@ public class Colecciones {
     }
 
     //Buscar coche pasando DNI propietario con MAP
-    
     private static void buscarCochesMapDNI(Map<String, Coche> mapCoches, String dnibuscar) {
 
         System.out.println("########### LISTA ############");
@@ -291,6 +333,76 @@ public class Colecciones {
             if (coche.getMarca() == Marca.FORD) {
                 System.out.println("-------------------------------------------------");
                 System.out.println(coche.getInformacionCoche());
+                System.out.println("-------------------------------------------------");
+            }
+        }
+
+        System.out.println("##############################");
+
+        System.out.println("");
+    }
+
+    //Insertar una persona nueva por consola
+    private static void insertarConsolaPersonas(List<Persona> personas, Map<String, Persona> mapPersonas) {
+
+        Persona p = new Persona();
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Dime el DNI: ");
+        String suDni = sc.next();
+        p.setDni(suDni);
+
+        System.out.println("Cual es tu nombre: ");
+        String suNombre = sc.next();
+        p.setNombre(suNombre);
+
+        System.out.println("Cual es tu apellido: ");
+        String suApellido = sc.next();
+        p.setApellido(suApellido);
+
+        System.out.println("¿Cual es tu sexo?");
+        System.out.println("1- Macho");
+        System.out.println("2- Hembra");
+
+        Scanner sex = new Scanner(System.in);
+
+        int seleccionSexo = sex.nextInt();
+
+        Sexo suSexo = null;
+
+        if (seleccionSexo == 1) {
+
+            suSexo = p.getSexo().HOMBRE;
+
+        } else if (seleccionSexo == 2) {
+
+            suSexo = p.getSexo().MUJER;
+        } else {
+
+            suSexo = p.getSexo().HERMAFRODITA;
+        }
+
+        p.setSexo(suSexo);
+
+        mapPersonas.put(suDni, p);  //Insertamos un map, indicando el Objeto y un indici (DNI)
+        personas.add(p);    //añadimos a la lista
+
+        //List<Coche> coches = p.getListaCoches();
+
+
+    }
+
+    //Imprimir las personas con MAP pasandole el DNI
+    private static void imprimirPersonasDNI(List<Persona> listaPersonas, String dnibuscar) {
+
+        System.out.println("########### LISTA ############");
+
+        for (Persona persona : listaPersonas) {
+
+            if (persona.getDni().equalsIgnoreCase(dnibuscar)) {
+                System.out.println("-------------------------------------------------");
+                System.out.println(persona.getNombreCompleto());
                 System.out.println("-------------------------------------------------");
             }
         }
